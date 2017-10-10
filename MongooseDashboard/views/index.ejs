@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Mongoos Dashboard</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+    <h2>List all of the animals</h2>
+    <form method="get" action="/new">
+        <input type="submit" value="Add new animal">
+    </form>
+    <% for(animal of animals) { %>  
+    <p>------------------------------------------</p>
+        <p>Name : <%= animal.name %>  Type : <%= animal.type %>"   Age : "<%= animal.age %>"</p>
+          <%= animal.createdAt %><%= animal.updatedAt %>
+            <form method="post" action="/edit/<%= animal.id %>">
+                <input type="submit" value="Edit">
+            </form>
+            <form method="post" action="/delete/<%= animal.id %>">
+                <input type="submit" value="delete">
+            </form>
+        <% } %>
+
+    
+    </body>
+</html>

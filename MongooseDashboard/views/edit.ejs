@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+    <a href="/">Home</a>
+    <h2> Edit Animal: <%= animal.name%></h2>
+    <form method="post" action="/update/<%= animal.id%>">
+        <br></br>
+        Animal Name :
+        <input type="text" name="name" value='<%= animal.name%>' required="true">
+        <br></br>
+        Animal Type :
+        <input type="text" name="type" value='<%= animal.type%>' required="true">
+        <br></br>
+        Animal Age :
+        <input type="text" name="age" value='<%= animal.age%>' required="true">
+        <br></br>
+        <input type="submit" value="Submit">
+    </form>
+    </body>
+</html>
