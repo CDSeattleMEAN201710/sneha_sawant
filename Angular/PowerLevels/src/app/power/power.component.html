@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <form (submit)='onSubmit()'>
+    <p>Initial power level : 
+    <input type='text' name='power' [(ngModel)]='power'>
+    <input type="submit" value="Calculate Powers"></p>
+  </form>
+  Initial Power : {{power}}
+</body>
+</html>
+<app-human [mainpower]='power'></app-human>
+<app-saiyan [mainpower]='power'></app-saiyan>
+<app-supersaiyan [mainpower]='power'></app-supersaiyan>
+<app-supersaiyantwo [mainpower]='power'></app-supersaiyantwo>
+<app-supersaiyanthree [mainpower]='power'></app-supersaiyanthree>
+<app-supersaiyanfour [mainpower]='power'></app-supersaiyanfour>
