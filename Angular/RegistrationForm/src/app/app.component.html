@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Registration</title>
+</head>
+<body>
+  <h2>Registration</h2>
+  <div class="form"> 
+    {{result}}
+    <h3>Account Information</h3>
+    <form (submit)="onSubmit()">
+    
+    <p>First name: <input type='text' name='first_name' 
+      required
+      minlength = '1'
+      [(ngModel)]='user.firstName'
+      #firstName="ngModel"></p>
+      <div *ngIf="!firstName.valid">First Name is required</div>
+
+    <p>Last name: <input type='text' name='last_name'
+      required
+      minlength = '1'
+      [(ngModel)]='user.lastName'
+      #lastName="ngModel"></p>
+      <div *ngIf="!lastName.valid">last Name is required</div>
+
+    <p>Email: <input type='text' name='email'
+        required
+        minlength = '5'
+        [(ngModel)]='user.email'
+        #email="ngModel"></p>
+        <div *ngIf="!email.valid">Email must be valid</div>
+
+    <p>Password : <input type="text" name="password" 
+      required 
+      minlength="8" 
+      maxlength="24"
+      pattern="^([a-zA-Z0-9@*#]{8,15})$"
+      [(ngModel)]="user.password"
+      #password='ngModel'></p>
+      <div *ngIf="!password.valid">Password should be atleast 8 characters long</div>
+
+    <p>Confirm_Password : <input type="text" name="password" 
+        required 
+        minlength="8" 
+        maxlength="24"
+        pattern="^([a-zA-Z0-9@*#]{8,15})$"
+        [(ngModel)]="user.confirmpassword"
+        #confirmpassword='ngModel'></p>
+        <!-- <div *ngIf="!password.valid">Password should be atleast 8 characters long</div> -->
+        <div *ngIf="!(user.password===user.confirmpassword)">No same password</div>
+
+      <p>Street Address: <input type='text' name='streetAddress'
+          required
+          minlength = '1'
+          [(ngModel)]='user.streetAddress'
+          #streetAddress="ngModel"></p>
+          <div *ngIf="!streetAddress.valid">Address is required</div>
+      
+      <p>Unit/Apt#: <input type='text' name='unit'
+            [(ngModel)]='user.unit'></p>
+          
+      <p>city: <input type='text' name='city'
+              required
+              minlength = '1'
+              [(ngModel)]='user.city'
+              #city="ngModel"></p>
+              <div *ngIf="!city.valid">City is required</div>
+
+      <p>State:
+      <select [(ngModel)]='user.state'>
+          <option value="Alaska">Alaska</option>
+          <option value="Washington">Washington</option>
+          <option value="California">California</option>
+          <option value="Texas">Texas</option>
+        </select></p>
+
+        <p>I am feeling lucky:
+        <input type="radio"  name="feel" [(ngModel)]='user.feel' require #feel="ngModel" value="yes">Yes
+        <input type="radio"  name="feel" [(ngModel)]='user.feel' require  #feel="ngModel"value="no">No
+        </p>
+        <div *ngIf="!feel.valid">Felling is required</div>
+      
+    <br>
+    <input *ngIf="lastName.valid && firstName.valid && email.valid && password.valid && user.confirmpassword && streetAddress.valid && city.valid && feel.valid " type='submit' value='submit'>
+  </form>
+  <!-- {{user | json}} -->
+</div>
+
+</body>
+</html>
