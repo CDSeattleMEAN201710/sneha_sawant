@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h2>Add a Quote :</h2>
+  <form (submit)="onSubmit()">
+
+  <textarea name='quote' 
+    required
+    minlength="4"
+    [(ngModel)]='quote.text' 
+    #text="ngModel"></textarea>
+    <div class='red' *ngIf='!text.valid'>Quote length must be at least 4 characters long</div>
+
+    <p>Author <input type='text' name ='author'
+      required 
+      minlength="1"
+      [(ngModel)]='quote.author'
+      #author="ngModel"></p>
+      <div class='red' *ngIf='!author.valid'>Author length must be at least a character long</div>
+
+    <input *ngIf='author.valid && text.valid' type='submit' value='Add Quote'>
+
+  </form>
+  
+
+</body>
+</html>
+<app-quoteslist [quoteList]='quoteList'></app-quoteslist>
