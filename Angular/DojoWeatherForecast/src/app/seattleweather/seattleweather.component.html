@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Weather</title>
+</head>
+<body>
+  <div>
+      <h2>{{ _dojoweatherService.data.name | json }}</h2>
+      <p>Temparature(Average) : {{ _dojoweatherService.data.main.temp | json }}</p>
+      <p>Temparature(High) : {{ _dojoweatherService.data.main.temp_max | json }} </p>
+      <p>Temparature(Low) : {{ _dojoweatherService.data.main.temp_min | json }}</p>
+      <p>Status : </p>
+      <div *ngFor='let status of _dojoweatherService.data.weather'>
+          <ul><li>{{status.main}}</li></ul>
+        </div>
+  </div>  
+</body>
+</html>
