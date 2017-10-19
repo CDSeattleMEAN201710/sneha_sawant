@@ -1,0 +1,203 @@
+===============================================================================================
+
+Service.ts :
+
+===============================================================================================
+
+
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+
+@Injectable()
+export class DojoweatherService {
+  data;
+  constructor(private _http: Http) { }
+
+  retrieveWeatherdata(cityname) {
+    this._http.get('http://api.openweathermap.org/data/2.5/weather?q=' + cityname + '&&APPID=16aa1315370bc5fe8f16cd9240c9c692').subscribe(
+      (response) => { this.data = response.json(); },
+      (error) => { console.log('Something is wrong', error); }
+    );
+  }
+
+}
+===============================================================================================
+
+Routing :
+
+===============================================================================================
+
+import { SeattleweatherComponent } from './seattleweather/seattleweather.component';
+import { SanjoseweatherComponent } from './sanjoseweather/sanjoseweather.component';
+
+const routes: Routes = [
+  {
+  path: '',
+  pathMatch: 'full',
+  component: WeatherComponent,
+  },
+  {
+    path: 'seattle',
+    pathMatch: 'full',
+    component: SeattleweatherComponent
+    },
+    {
+      path: 'sanjose',
+      pathMatch: 'full',
+      component: SanjoseweatherComponent
+    },
+    {
+      path: 'burbank',
+      pathMatch: 'full',
+      component: BurbankweatherComponent
+    },
+];
+===============================================================================================
+
+app.cpmponent.html :
+
+===============================================================================================
+.details{
+    border : 2px solid black;
+    margin: 10px;
+    padding:  20px;
+}
+
+
+<body>
+  <div>
+    <h1>Dojo Weather Forecast</h1>
+    <a [routerLink]="['']">Weather</a> | 
+    <a [routerLink]="['seattle']">Seattle WA</a> |
+    <a [routerLink]="['sanjose']">San Jose CA</a> | 
+    <a [routerLink]="['burbank']">Burbank CA</a> | 
+    <a [routerLink]="['']">Dallas TX</a> | 
+    <a [routerLink]="['']">Washington DC</a> | 
+    <a [routerLink]="['']">Chicago IL</a>  
+  </div>  
+  <div class="details">
+      <router-outlet></router-outlet>
+  </div>
+</body>
+</html>
+
+===============================================================================================
+
+<appname>.ts :
+
+===============================================================================================
+import { DojoweatherService } from './../dojoweather.service';
+
+cityname = 'seattle';
+
+  constructor(private _dojoweatherService:  DojoweatherService) {
+    this._dojoweatherService.retrieveWeatherdata(this.cityname);
+  }
+  
+  
+===============================================================================================
+
+<appname>.html :
+
+===============================================================================================
+<h2>{{ _dojoweatherService.data.name | json }}</h2>
+      <p>Temparature(Average) : {{ _dojoweatherService.data.main.temp | json }}</p>
+      <p>Temparature(High) : {{ _dojoweatherService.data.main.temp_max | json }} </p>
+      <p>Temparature(Low) : {{ _dojoweatherService.data.main.temp_min | json }}</p>
+      <p>Status : </p>
+      <div *ngFor='let status of _dojoweatherService.data.weather'>
+          <ul><li>{{status.main}}</li></ul>
+        </div>
+		
+===============================================================================================
+
+<formvalidation>.html :
+
+
+===============================================================================================		
+		
+<form (submit)="onSubmit()" #quoteForm='ngForm' >
+
+  <textarea name='quote' 
+    required
+    minlength="4"
+    [(ngModel)]='quote.text' 
+    [ngClass]="{ boxborder : text.errors }"
+    #text="ngModel"></textarea>
+    <span *ngIf='text.errors'>Error : </span>
+    <span *ngIf='text.errors?.required'>Quote is required</span>
+    <span *ngIf='text.errors?.minlength'>Minimum length is {{text.errors.minlength.requiredLength}}</span> 
+
+    <p>Author <input type='text' name ='author'
+      required 
+      minlength="1"
+      [(ngModel)]='quote.author'
+      [ngClass]="{ boxborder : author.errors }"
+      #author="ngModel"></p>
+      <span *ngIf='author.errors'>Error : </span>
+      <span *ngIf='author.errors?.required'>Quote is required</span>
+      <span *ngIf='author.errors?.minlength'>Minimum length is {{author.errors.minlength.requiredLength}}</span> 
+
+    <p><input type='submit' value='Add Quote' [disabled]='!quoteForm.valid'></p>
+  </form>	
+
+===============================================================================================	
+	
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
+import { Router } from '@angular/router';
+import { Http } from '@angular/http';
+
+import { User } from './user';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
+import 'rxjs';
+
+    return this._http.post('/login', new_user).map(data => data.json()).toPromise();
+	
+	this._userService.create(this.new_user)
+      .then( () => this.router.navigate(['/dashboard']))
+      .catch(err => console.log('login err:', err ));
+
+===============================================================================================	
+Start 3 servers :
+
+Express :
+1) cd "/s/Coding Dojo/MEAN/Angular/<projectname>"
+nodemon server.js
+
+Angular :
+2) cd "/s/Coding Dojo/MEAN/Angular/<projectname>/client"
+ng build -w
+
+MongoDB :
+3) cd "/c/Program Files/MongoDB/Server/3.4/bin"
+./mongod.exe
+
+===============================================================================================
+		
+  { 
+    path: 'battle',
+    component : BattleComponent,
+  },
+  {
+    path: 'rankings',
+    component : RankingsComponent,
+  },
+  
+  <h1>Team Manager</h1>
+
+<a [routerLink]="['players','list']">Manage Players</a> |
+<a [routerLink]="['players','status']">Manage Player Status</a>
+
+<div class="details">
+  <router-outlet></router-outlet>
+</div>
+
+.details{
+    border : 2px solid black;
+    margin: 10px;
+    padding:  20px;
+}
